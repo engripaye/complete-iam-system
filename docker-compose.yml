@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   postgres:
-    image: postgres:16
+    image: postgres:15
     environment:
       POSTGRES_DB: iam_db
       POSTGRES_USER: postgres
