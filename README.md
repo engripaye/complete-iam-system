@@ -1,4 +1,5 @@
-Identity Access Management (IAM) system using Java 21, Spring Boot 3.5, and the OAuth 2.0 protocol for authentication and authorization. The system will include user authentication, role-based authorization, and secure access to resources using OAuth 2.0. I’ll provide a detailed explanation of each component, the architecture, and the code to implement it. Since this is a complex task, I’ll break it down into manageable sections, ensuring clarity and completeness.
+# Identity Access Management (IAM) system 
+using Java 21, Spring Boot 3.5, and the OAuth 2.0 protocol for authentication and authorization. The system will include user authentication, role-based authorization, and secure access to resources using OAuth 2.0. I’ll provide a detailed explanation of each component, the architecture, and the code to implement it. Since this is a complex task, I’ll break it down into manageable sections, ensuring clarity and completeness.
 
 Overview of the IAM System
 The IAM system will:
