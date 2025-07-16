@@ -9,15 +9,16 @@ import org.springframework.security.web.SecurityFilterChain;
 public class ResourceServerConfig {
 
     @Bean
-    public SecurityFilterChain resourceServerSecurityFilterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain resourceServerSecurityFilterChain(HttpSecurity http) throws Exception {
         http
+                .securityMatcher("/api/**") // only applies to /api routes
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/public").permitAll()
                         .requestMatchers("/api/user").hasAuthority("SCOPE_read")
                         .requestMatchers("/api/admin").hasAuthority("ROLE_ADMIN")
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt(jwt -> jwt.jwkSetUri("http://localhost:9000/.well-known/jwks.json")));
+                        .jwt(jwt -> jwt.jwkSetUri("http://localhost:8081/.well-known/jwks.json")));
         return http.build();
     }
 }
