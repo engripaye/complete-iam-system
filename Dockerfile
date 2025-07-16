@@ -1,14 +1,12 @@
-# Use OpenJDK as base image
+# Use Maven image to build the JAR
+FROM maven:3.9.6-eclipse-temurin-21 AS build
+WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
+
+# Use OpenJDK runtime image for production
 FROM openjdk:21-jdk-slim
-
-# Set the app JAR file
-ARG JAR_FILE=target/iam-app.jar
-
-# Copy the JAR into the container
-COPY target/complete-iam-system-0.0.1-SNAPSHOT.jar app.jar
-
-# Expose application port
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
-
-# Run the app
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
