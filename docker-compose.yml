@@ -1,39 +1,15 @@
 version: "3.8"
 services:
-  postgres:
-    image: postgres:15
-    environment:
-      POSTGRES_DB: iam_db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: secret
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - iam-network
-
   iam-app:
     build:
       context: .
       dockerfile: Dockerfile
-    depends_on:
-      - postgres
     ports:
       - "8081:8081"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/iam_db
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: secret
+      SPRING_DATASOURCE_URL: jdbc:postgresql://dpg-d1qspffdiees73f9ihkg-a.oregon-postgres.render.com:5432/taskdb_waej
+      SPRING_DATASOURCE_USERNAME: taskdb_waej_user
+      SPRING_DATASOURCE_PASSWORD: 8yPg3XF2RTMR0w92GHA1JvnTsCRynDMb
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_JPA_SHOW_SQL: "true"
       SERVER_PORT: 8081
-    networks:
-      - iam-network
-
-volumes:
-  postgres_data:
-
-networks:
-  iam-network:
-    driver: bridge
